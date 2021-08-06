@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Corona Dashboard</title>
+<style>
+table,th,td{
+border:1px solid black;
+border-collapse:collapse;
+}
+</style>
+
+</head>
+<body ng-app="counterApp" ng-controller="counterController">                           
+
+ <h1>Corona Dashboard</h1>
+
+StateName:<input type="text" name="num2" id="num2" ng-model="num2" placeholder="Enter StateName"><br>
+Total:<input type="number" name="num1" id="num1" ng-model="num1" placeholder="Enter Total"><br>
+Active:<input type="text" name="num3" id="num3" ng-model="num3" placeholder="Enter Active"><br>
+Recovered:<input type="text" name="num3" id="num3" ng-model="num4" placeholder="Recovered"><br>
+Dead:<input type="text" name="num3" id="num3" ng-model="num5" placeholder="Dead"><br><br>
+
+
+<button ng-click="counter()" id="butt">Submit</button><br><br><br><br>
+
+<table>
+<tr>
+<th>StateName</th>
+<th>Total</th>
+<th>Active</th>
+<th>Recovered</th>
+<th>Dead</th>
+</tr>
+
+<tr>
+<td>{{state}}</td>
+<td>{{Total}}</td>
+<td>{{Active}}</td>
+<td>{{Recovered}}</td>
+<td>{{Dead}}</td>    
+</tr>
+</table>
+
+ <script>
+        var app=angular.module("counterApp",[]);
+        app.controller("counterController",function($scope){
+                    $scope.state='';        
+            $scope.Total=0;
+            $scope.Active='';
+            $scope.Recovered='';
+            $scope.Dead='';
+            
+            $scope.counter=function(){
+                  $scope.state=$scope.num2;
+                    $scope.Total=$scope.num1;
+                     $scope.Active=$scope.num3;
+                     $scope.Recovered=$scope.num4;
+                     $scope.Dead=$scope.num5;
+                return $scope.Dead;
+            };
+        });
+    </script>
+
+</body>
+</html>

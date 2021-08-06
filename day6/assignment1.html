@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <h1>Open weather API</h1>
+    
+        <label for="location">Location</label>
+        <input type="text" id="location"><br>
+        
+    
+    <button onclick=weather()>Submit</button>
+
+    <h2 id="root"></h2>
+    <div id="this"></div>
+    <script>
+        weatherArray=[];
+
+    function weather(){
+        document.getElementById("root").innerHTML="weather information";
+          var loc=document.getElementById("location").value;
+          fetch('http://api.openweathermap.org/data/2.5/weather?q='+loc+'&appid=47e150eb0617c91f6027735896b201a0&units=metric')
+            .then(response=>response.json())
+            .then(json=>displayweather(json))
+    }
+    function displayweather(data){
+        weatherArray=data;
+        console.log(weatherArray);
+        var data='';
+        data=data+`Coord lon:${weatherArray.coord.lon}  Coord lat:${weatherArray.coord.lat}  Temp:${weatherArray.main.temp}  Pressure${weatherArray.main.pressure}  Humidity:${weatherArray.main.humidity}  Wind Speed:${weatherArray.wind.speed}`;
+        document.getElementById("this").innerHTML=data;
+
+         }
+
+    </script>
+    
+</body>
+</html>

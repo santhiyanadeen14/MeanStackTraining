@@ -1,0 +1,81 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Module and Controller</title>
+</head>
+<body ng-app="counterApp" ng-controller="counterController">
+    <h1>eCommerce</h1>
+
+ Mobile Number:<input type="text" name="num2" id="num2" ng-model="num2" placeholder="Enter Mobile Number"><br>
+ purchase Amount<input type="number" name="num1" id="num1" ng-model="num1" placeholder="Enter purchase Amount"><br>
+ Do u have card:<input type="text" name="num3" id="num3" ng-model="num3" placeholder="Enter y or n"><br><br>
+
+<button ng-click="counter()">Bill</button><br><br>
+<label>Purchase Amount:{{num1}}</label><br>
+<label>Discount:{{output1}}</label><br>
+<label>Amount to Pay:{{output4}}</label><br>
+
+ <script>
+        var app=angular.module("counterApp",[]);
+        app.controller("counterController",function($scope){
+                   $scope.num1=0;
+                   $scope.output1=0;
+                    $scope.output2=0;
+                     $scope.output3=0;
+                     $scope.output4=0;
+                   $scope.counter=function(){
+                    output=0;
+                   if($scope.num1<=10000){
+                        output=($scope.num1*10)/100;
+                         $scope.output1=output;                 //1000
+                         $scope.output2=$scope.num1 - $scope.output1;  //9000
+                         
+                         if($scope.num3=='y'){
+                             $scope.output3=($scope.num1*15)/100;           //850
+                             $scope.output1 = $scope.output3;                
+                              }
+                         $scope.output4 = $scope.num1 - $scope.output1;  //10000-1500
+                              
+                   }
+                   else if($scope.num1>=10000 && $scope.num1<=20000){
+                        output=($scope.num1*20)/100
+                         $scope.output1=output;
+                         $scope.output2=$scope.num1-$scope.output1;
+
+                         if($scope.num3=='y'){
+                             $scope.output3=($scope.num1*25)/100;          
+                             $scope.output1 = $scope.output3;                
+                              }
+                         $scope.output4 = $scope.num1 - $scope.output1; 
+
+                                                 
+                   } 
+                   else if($scope.num1>20000 && $scope.num1>=30000){
+                        output=($scope.num1*30)/100
+                         $scope.output1=output;
+                         $scope.output2=$scope.num1-$scope.output1;
+
+                         if($scope.num3=='y'){
+                             $scope.output3=($scope.num1*35)/100;          
+                             $scope.output1 = $scope.output3;                
+                              }
+                         $scope.output4 = $scope.num1 - $scope.output1; 
+
+                                                 
+                   } 
+                    
+
+                  return $scope.output1;                  <!--  return $scope.count = $scope.count +1; -->
+           
+            };
+        });
+
+
+    </script>
+
+</body>
+</html>

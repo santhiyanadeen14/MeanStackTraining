@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Sorting Assignment</title>
+    <link href="dynamicstyle.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    
+    <script src="iplscript.js"></script>
+
+</head>
+<body ng-app="orderByExample2">
+    <div ng-controller="iplController">
+        <pre>Sort by = {{propertyName}}; reverse = {{reverse}}</pre>
+        <hr/>
+        <button ng-click="propertyName = null; reverse = false">Set to unsorted</button>
+        <hr/>
+
+        <table class="friends">
+            <tr>
+              <th>
+                Player Name
+                
+              </th>
+              <th>
+              Team
+                
+              </th>
+              <th>
+                Season
+                
+              </th>
+              <th>
+                <button ng-click="sortBy('runs')">Runs</button>
+                <span class="sortorder" ng-show="propertyName === 'runs'" ng-class="{reverse: reverse}"></span>
+              </th>
+              <th>
+                <button ng-click="sortBy('wickets')">Wickets</button>
+                <span class="sortorder" ng-show="propertyName === 'wickets'" ng-class="{reverse: reverse}"></span>
+              </th>
+            </tr>
+            <tr ng-repeat="ipl in ipl | orderBy:propertyName:reverse">
+              <td>{{ipl.name}}</td>
+              <td>{{ipl.team}}</td>
+              <td>{{ipl.season}}</td>
+              <td>{{ipl.runs}}</td>
+              <td>{{ipl.wickets}}</td>
+            </tr>
+          </table>
+        </div>
+       
+</body>
+</html>

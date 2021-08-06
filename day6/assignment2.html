@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Assignment</title>
+    <style>
+     #container{
+            margin:auto;
+            width:80%;
+        }
+
+        #addtodos{
+            margin:auto;
+            width:80%;
+        }
+        
+       
+    </style>
+</head>
+<body onload="getTodos()">
+        <div id="container">
+                <div>
+                    <h1 style="text-align: center;">End to End CRUD</h1>
+                </div>
+                <div id="addtodos">
+        
+                    <!--<h1>Add Todo's</h1>-->
+                    <!--<input type="text" name="id" id="id" placeholder="Enter Id"><br>-->
+                    <input type="text" name="id" id="id" placeholder="Id" disabled><br>
+        
+                    <input type="text" name="title" id="title" placeholder="Enter name"><br>
+                    <input type="text" name="email" id="email" placeholder="Enter email"><br>
+                    <input type="text" name="status" id="status" placeholder="Enter city"><br>
+                    <input type="text" name="phone" id="phone" placeholder="Enter phone"><br>
+                    <input type="text" name="company" id="company" placeholder="Enter company"><br><br>
+
+                    <button id="add" onclick="addTodos()">Add User</button><br><br><br>
+                    <button id="update" onclick="UpdateData()" disabled>Update User</button><br><br><br>
+                </div>
+                <div>
+                    <table id='result'></table>
+                </div>
+            </div>
+       <script>
+         var todos=[];
+         function getTodos(){
+            document.getElementById('add').disabled=false;
+            document.getElementById('update').disabled=true;
+            fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response=>response.json())
+            //.then(json=>console.log(json))
+            .then(json=>showTodos(json))    
+        }
+
+        function showTodos(data){
+            todos=data;           
+            var dispdata=`<tr><th>Id</th><th>Name</th><th>Email</th><th>City</th><th>Phone</th><th>Company</th><th>Update</th><th>Delete</th></tr>`;
+            for (let i=0;i<todos.length;i++){
+                dispdata= dispdata +`<tr><td>${todos[i].id}</td><td>${todos[i].name}</td><td>${todos[i].email}</td><td>${todos[i].address.city}</td><td>${todos[i].phone}</td><td>${todos[i].company.name}</td><td><button id=${todos[i].id} onclick="updateTodos(${todos[i].id})">Update</button></td><td><button id=${todos[i].id} onclick="deleteTodos(${todos[i].id})">Delete</button></tr>`;
+            }
+            document.getElementById('result').innerHTML=dispdata;
+        }
+
+        function updateTodos(id)
+        {
+            datatoupdate='';
+            for (i=0;i<todos.length;i++)
+            {
+               if (todos[i].id==id)
+               datatoupdate = todos[i];
+            }            
+            document.getElementById('id').value=datatoupdate.id;
+            document.getElementById('title').value=datatoupdate.name;
+            document.getElementById('email').value=datatoupdate.email;
+            document.getElementById('status').value=datatoupdate.city;
+            document.getElementById('phone').value=datatoupdate.phone;
+            document.getElementById('company').value=datatoupdate.name;
+            document.getElementById('add').disabled=true;
+            document.getElementById('update').disabled=false;            
+        }
+
+        function deleteTodos(id)
+        {            
+            console.log("delete todo id ",id);
+            deleteindex=-1;
+            for (i=0;i<todos.length;i++)
+            {
+               if (todos[i].id==id)
+                deleteindex = i;
+            }
+            if (deleteindex>=0)
+            {
+                console.log('delete index::',deleteindex);
+                todos.splice(deleteindex,1);
+            }
+            showTodos(todos);
+        }
+        
+        function addTodos(){
+            id=todos.length+1;
+            console.log('id ',id);           
+            name=document.getElementById('title').value;
+            email=document.getElementById('email').value;
+            status=document.getElementById('status').value;
+            phone=document.getElementById('phone').value;
+            company=document.getElementById('company').value;
+            //newtodo = {'id':id,'title':title,'userId':userId,'status':status};
+            fetch('https://jsonplaceholder.typicode.com/users',            
+            {
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                method: 'POST',
+                body: JSON.stringify({
+                    id: id,
+                    name: title,
+                    email:email,
+                    status:status,
+                    phone:phone,
+                    company:company
+                })
+            }            
+            )
+            .then(response=>response.json())
+            //.then(json=>console.log('add ',json))
+            .then(json=>addData(json))
+        
+        }
+        function addData(todo){
+            todos.unshift(todo);
+            showTodos(todos);        
+        }
+
+        function UpdateData(){            
+            id=document.getElementById('id').value;
+            name=document.getElementById('title').value;
+            email=document.getElementById('email').value;
+            city=document.getElementById('status').value;
+            phone=document.getElementById('phone').value;
+            company=document.getElementById('company').value;
+            url=`https://jsonplaceholder.typicode.com/users/${id}`
+            
+            fetch(url,            
+            {
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                method: 'PUT',
+                body: JSON.stringify({
+                    id: id,
+                    name: title,
+                    email:email,
+                    city:status,
+                    phone:phone,
+                    company:company
+                })
+            }            
+            )
+            .then(response=>response.json())
+            .then(json=>
+            {
+                console.log('updated',json);
+                for (i=0;i<todos.length;i++)
+                {
+                    if (todos[i].id==id)
+                    {
+                        updatedtodos={
+                            id: id,
+                            name: title,
+                            email:email,
+                            city:status,
+                            phone:phone,
+                            company:company
+
+                        };
+                        console.log('updated todos :: ',updatedtodos);
+                        todos[i]=updatedtodos;
+                        showTodos(todos);
+                    }            
+                }
+            }          
+            
+            )
+        }
+   
+
+
+       
+       
+       </script>     
+    
+</body>
+</html>

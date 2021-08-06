@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>forms</title>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">corona patient management</h2>
+<form action="action.html">
+
+<label for="name">name of the patient</label><br>
+<input type="text" id="name" name="name" maxlength="50" autofocus><br>
+
+<label>gender</label>
+male:<input type="radio" name="gender" value="m" >
+female:<input type="radio" name="gender" value="f">
+<br>
+
+<label>location:</label>
+<select>
+<option>bangalore</option>
+<option>chennai</option>
+</select>
+<br>
+
+<label>pincode</label>
+<input type="number" id="pincode" name="pincode" maxlength="6"><br>
+
+<label for="Aadhar">Aadhar</label>
+<input type="number" id="Aadhar" name="Aadhar" maxlength="10"><br>
+
+<label for="mobile">mobile</label>
+<input type="number" id="number" name="number" maxlength="10" ><br>
+
+<label for="attendee">attendee Name</label>
+<input type="text" id="attendee" name="attendee"><br>
+
+<label for="datetime-local">date and time of request</label>
+<input type="datetime-local" id="datetime-local" name="datetime-local;"><br>
+
+<label for="sop">SPO2 level</label>
+<input type="range" id="sop" name="sop" min="0" max="100;"><br>
+
+<label>type of hospital:</label>
+<select>
+<option>govt</option>
+<option>private</option>
+<option>care center</option>
+</select>
+<br>
+
+
+
+<input type="submit" value="submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+     <h1 id="Calc">Calculator</h1>
+<div>
+<label>Input 1</label>
+<input id="input1" type="number"/>
+</div>
+<div>
+<label>Operator</label>
+<input id="operator1" type="text"/>
+</div>
+<div>
+<label>Input 2</label>
+<input id="input2" type="number"/>
+</div>
+<br>
+<div>
+<button onclick="CalculateMe()">Calculate</button>
+</div>
+<br>
+<div>
+<h2 id="Result">Result Of Operation is </h2>
+</div>
+<script>
+
+    //function
+    function CalculateMe(){
+    num1 = document.getElementById("input1").value;
+    num2 = document.getElementById("input2").value;
+    operator = document.getElementById("operator1").value;
+    if(operator=="+")
+    {
+    res = num1+num2;
+    }
+    if(operator=="-")
+    {
+    res = num1 - num2;
+    }
+    if(operator=="*")
+    {
+    res = num1 * num2;
+    }
+    if(operator=="/")
+    {
+    res = num1 / num2;
+    }
+    
+    document.getElementById("Result").innerHTML="Result Of Operation is "+res;
+    }
+    </script>
+
+
+</body>
+</html>

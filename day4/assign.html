@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1> electricity bill </h1>
+
+    <script>
+         function calculateBil(units){
+
+               if(units<=100){
+                   res=units*1;
+                console.log(res);
+               }
+
+               else if(units>100 && units<200){
+                    res1=units-100;
+                   res2=res1*2;
+                   ans=100*1;
+                   end1=ans+res2;
+                    console.log(end1); 
+                }     
+                else{
+                    res1=units-100;
+                   res2=res1*3;
+                   ans=100*1;
+                   end1=ans+res2;
+                    console.log(end1);
+                }
+        }
+    calculateBil(300);
+    </script>
+</body>
+</html>

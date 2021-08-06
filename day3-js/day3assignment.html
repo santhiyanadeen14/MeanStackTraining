@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+</head>
+
+<body>
+    <h1>IPL</h1>
+
+    
+    <input type="text" name="name" id="name" placeholder="Enter Name"><br>
+    <input type="text" name="Team" id="Team" placeholder="Enter Team"><br>
+    <input type="text" name="Season" id="Season" placeholder="Enter Season"><br>
+    <input type="text" name="Runs" id="Runs" placeholder="Runs"><br>
+    <input type="text" name="Wickets" id="Wickets" placeholder="Wickets"><br>
+
+    <button onclick="saveEmployee()">Save</button>
+    <button onclick="Leader()">Leader</button>
+    
+    <table id="result">
+
+    </table>
+
+    <h2 id="head"></h2>
+    <table id="max">
+
+    </table>
+    
+    <h2 id="new"></h2>
+    <table id="maxnew">
+
+    </table>
+    
+    
+    <script>
+            emplist=[];
+
+    function employee(name,Team,Season,Runs,Wickets){
+        this.name = name;
+        this.Team=Team;
+        this.Season=Season;
+        this.Runs = Runs;
+        this.Wickets = Wickets;
+
+       /** this.getName=function(){
+            return this.name;
+        };
+        this.getTeam=function(){
+            return this.Team;
+        } **/
+    }
+
+    function displayEmployee(){
+        var data = '';    
+        for (var i=0;i<emplist.length;i++){
+            data = data + '<tr>';
+            data=data+'<td>'+emplist[i].name+'</td>'+'<td>'+emplist[i].Team+'</td>'+'<td>'+emplist[i].Season+'</td>'+'<td>'+emplist[i].Runs+'</td>'+'<td>'+emplist[i].Wickets+'</td>';    
+            data = data+'</tr>';
+        }
+        document.getElementById('result').innerHTML=data;
+    }
+ 
+        function saveEmployee(){
+            name = document.getElementById("name").value;
+            Team = document.getElementById("Team").value;
+            Season = document.getElementById("Season").value;
+            Runs = document.getElementById("Runs").value;
+            Wickets = document.getElementById("Wickets").value;
+            emp = new employee(name,Team,Season,Runs,Wickets);
+            emplist.push(emp);
+            console.log('emplist ',emplist);
+            displayEmployee();
+        }
+
+        function Leader(){
+            var run='0';
+            var maxrun='';
+            for(var i=0;i<=emplist.length-1;i++){
+                if(run<emplist[i].Runs){
+                    run=emplist[i].Runs;
+                    maxrun = maxrun + '<tr>';
+                    maxrun='<td>'+emplist[i].name+'</td>'+'<td>'+emplist[i].Team+'</td>'+'<td>'+emplist[i].Season+'</td>'+'<td>'+emplist[i].Runs+'</td>'+'<td>'+emplist[i].Wickets+'</td>';    
+                    maxrun = maxrun+'</tr>';
+
+
+                }
+                
+              /*  else{
+                    maxrun = maxrun + '<tr>';
+                    maxrun='<td>'+emplist[i+1].name+'</td>'+'<td>'+emplist[i+1].Team+'</td>'+'<td>'+emplist[i+1].Season+'</td>'+'<td>'+emplist[i+1].Runs+'</td>'+'<td>'+emplist[i+1].Wickets+'</td>';    
+                    maxrun = maxrun+'</tr>';
+
+                } */
+            }
+             
+            document.getElementById('head').innerHTML="OrangeCap :";
+            document.getElementById('head').style.backgroundColor="orange";
+            document.getElementById('max').innerHTML=maxrun;
+            //document.getElementById('max').style.backgroundColor="blue";
+            Wickets();
+
+        }
+
+       
+       //wicket
+       function Wickets(){
+       var maxWickets='';
+            for(var i=0;i<emplist.length-1;i++){
+                if(emplist[i].Wickets > emplist[i+1].Wickets){
+                    maxWickets = maxWickets + '<tr>';
+                    maxWickets='<td>'+emplist[i].name+'</td>'+'<td>'+emplist[i].Team+'</td>'+'<td>'+emplist[i].Season+'</td>'+'<td>'+emplist[i].Runs+'</td>'+'<td>'+emplist[i].Wickets+'</td>';    
+                    maxWickets = maxWickets+'</tr>';
+
+
+                }
+                
+                else{
+                    maxWickets = maxWickets + '<tr>';
+                    maxWickets='<td>'+emplist[i+1].name+'</td>'+'<td>'+emplist[i+1].Team+'</td>'+'<td>'+emplist[i+1].Season+'</td>'+'<td>'+emplist[i+1].Runs+'</td>'+'<td>'+emplist[i+1].Wickets+'</td>';    
+                    maxWickets = maxWickets+'</tr>';
+
+                }
+            }
+             
+            document.getElementById('new').innerHTML="PurpleCap :";
+            document.getElementById('new').style.backgroundColor="purple";
+            document.getElementById('maxnew').innerHTML= maxWickets;
+            document.getElementById('maxnew').style.backgroundColor="blue";
+
+
+           
+        }
+ 
+
+    
+    </script>
+</body>
+</html>
